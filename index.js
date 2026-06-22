@@ -1,15 +1,16 @@
-const express = require("express");
-const axios = require("axios");
-require("dotenv").config();
+const PORT = process.env.PORT || 3000;
 
-const app = express();
+console.log("CLIENT_ID:", CLIENT_ID ? "OK" : "UNDEFINED");
+console.log("CLIENT_SECRET:", CLIENT_SECRET ? "OK" : "UNDEFINED");
+console.log("REDIRECT_URI:", REDIRECT_URI);
 
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const REDIRECT_URI = process.env.REDIRECT_URI;
+console.log("OAuth URL sendo gerada com:");
+console.log("CLIENT_ID:", CLIENT_ID);
+console.log("REDIRECT_URI:", REDIRECT_URI);
 
-app.get("/", (req, res) => {
-
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
 const url =
 `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify guilds.join`;
 
