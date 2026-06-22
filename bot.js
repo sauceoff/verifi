@@ -30,7 +30,7 @@ client.on(Events.MessageCreate, async (message) => {
                 new ButtonBuilder()
                     .setLabel('🔰 Autorizar')
                     .setStyle(ButtonStyle.Link)
-                    .setURL('http://localhost:3000')
+                    .setURL('https://verifi-ai60.onrender.com')
             );
 
         await message.channel.send({
