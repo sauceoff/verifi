@@ -224,5 +224,5 @@ res.send("Erro na verificação.");
 });
 
 app.listen(3000, () => {
-console.log("Servidor rodando em http://localhost:3000");
+console.log("https://verifi-ai60.onrender.com/callback");
 });
