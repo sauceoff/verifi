@@ -1,0 +1,33 @@
+◇ injected env (6) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+C:\Users\SnyX\Desktop\verificacao\node_modules\discord.js\src\client\websocket\WebSocketManager.js:140
+    const invalidToken = new DiscordjsError(ErrorCodes.TokenInvalid);
+                         ^
+
+DiscordjsError [TokenInvalid]: An invalid token was provided.
+    at WebSocketManager.connect (C:\Users\SnyX\Desktop\verificacao\node_modules\discord.js\src\client\websocket\WebSocketManager.js:140:26)
+    at Client.login (C:\Users\SnyX\Desktop\verificacao\node_modules\discord.js\src\client\Client.js:229:21)
+    at Object.<anonymous> (C:\Users\SnyX\Desktop\verificacao\bot.js:44:8)
+    at Module._compile (node:internal/modules/cjs/loader:1854:14)
+    at Object..js (node:internal/modules/cjs/loader:1985:10)
+    at Module.load (node:internal/modules/cjs/loader:1577:32)
+    at Module._load (node:internal/modules/cjs/loader:1379:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  code: 'TokenInvalid'
+}
+Thrown at:
+    at connect (C:\Users\SnyX\Desktop\verificacao\node_modules\discord.js\src\client\websocket\WebSocketManager.js:140:26)
+    at login (C:\Users\SnyX\Desktop\verificacao\node_modules\discord.js\src\client\Client.js:229:21)
+    at C:\Users\SnyX\Desktop\verificacao\bot.js:44:8
+    at node:internal/modules/cjs/loader:1854:14
+    at node:internal/modules/cjs/loader:1985:10
+    at node:internal/modules/cjs/loader:1577:32
+    at node:internal/modules/cjs/loader:1379:12
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at executeUserEntryPoint (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+
+Node.js v24.17.0
+Assertion failed: !(handle->flags & UV_HANDLE_CLOSING), file src\win\async.c, line 94

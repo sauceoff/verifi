@@ -1,20 +1,22 @@
-const PORT = process.env.PORT || 3000;
+const express = require("express");
+const axios = require("axios");
+require("dotenv").config();
+
+const app = express();
+
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 console.log("CLIENT_ID:", CLIENT_ID ? "OK" : "UNDEFINED");
 console.log("CLIENT_SECRET:", CLIENT_SECRET ? "OK" : "UNDEFINED");
 console.log("REDIRECT_URI:", REDIRECT_URI);
 
-console.log("OAuth URL sendo gerada com:");
-console.log("CLIENT_ID:", CLIENT_ID);
-console.log("REDIRECT_URI:", REDIRECT_URI);
+app.get("/", (req, res) => {
+  const url =
+    `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify`;
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
-const url =
-`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&scope=identify guilds.join`;
-
-res.send(`
+  res.send(`
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -22,7 +24,6 @@ res.send(`
 <title>ChupetaZ Verify</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -89,24 +90,19 @@ transition:.3s;
 .btn:hover{
 transform:scale(1.05);
 }
-
 </style>
 
 </head>
+
 <body>
 
 <div class="box">
 
-<img
-src="https://i.imgur.com/DaHHeIZ.png"
-class="logo"
->
+<img src="https://i.imgur.com/DaHHeIZ.png" class="logo">
 
 <h1>CHUPETAZ VERIFY</h1>
 
-<p>
-Clique no botão abaixo para verificar sua conta.
-</p>
+<p>Clique no botão abaixo para verificar sua conta.</p>
 
 <a class="btn" href="${url}">
 ✅ VERIFICAR
@@ -117,18 +113,18 @@ Clique no botão abaixo para verificar sua conta.
 </body>
 </html>
 `);
-
 });
+
 
 app.get("/callback", async (req, res) => {
 
 const code = req.query.code;
 
-if (!code){
+if (!code) {
 return res.send("Código inválido.");
 }
 
-try{
+try {
 
 const token = await axios.post(
 "https://discord.com/api/oauth2/token",
@@ -146,16 +142,19 @@ headers:{
 }
 );
 
+
 const accessToken = token.data.access_token;
+
 
 const user = await axios.get(
 "https://discord.com/api/users/@me",
 {
 headers:{
-Authorization:`Bearer ${accessToken}`
+Authorization: `Bearer ${accessToken}`
 }
 }
 );
+
 
 res.send(`
 <!DOCTYPE html>
@@ -205,9 +204,7 @@ margin-bottom:20px;
 
 <p>Bem-vindo ${user.data.username}</p>
 
-<p>
-Sua conta foi verificada com sucesso.
-</p>
+<p>Sua conta foi verificada com sucesso.</p>
 
 </div>
 
@@ -215,7 +212,7 @@ Sua conta foi verificada com sucesso.
 </html>
 `);
 
-}catch(err){
+} catch(err) {
 
 console.log(err.response?.data || err);
 res.send("Erro na verificação.");
@@ -224,6 +221,9 @@ res.send("Erro na verificação.");
 
 });
 
-app.listen(3000, () => {
-console.log("https://verifi-ai60.onrender.com/callback");
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+console.log(`Servidor rodando na porta ${PORT}`);
 });
